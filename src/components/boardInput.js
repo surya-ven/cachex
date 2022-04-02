@@ -1,4 +1,8 @@
-const BoardInput = ({ board, setBoard, testSolution, setTestSolution }) => {
+import { useState } from "react";
+
+const BoardInput = ({ board, setBoard, testSolution, setTestSolution, generatedInput }) => {
+	
+	
 	const handleSubmit = (e) => {
 		e.preventDefault();
         // console.log(e.target.input.value);
@@ -55,6 +59,24 @@ const BoardInput = ({ board, setBoard, testSolution, setTestSolution }) => {
 								</div>
 							</div>
 						</div>
+						<form>
+						<div className="shadow overflow-hidden sm:rounded-md">
+							<div className="flex px-4 py-3 bg-gray-50 text-right sm:px-6">
+								<div className="mr-5">
+									<label className="w-24 block text-l font-medium text-gray-700">
+										Generated Input Json From Board
+									</label>
+								</div>
+								<textarea
+									type="text"
+									// name="generated-input"
+									className="mt-5 w-60 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-medium border-gray-300 rounded-md"
+									value={generatedInput}
+									rows="15"
+								/>
+							</div>
+						</div>
+						</form>
 					</form>
 				</div>
 			</div>

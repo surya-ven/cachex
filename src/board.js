@@ -49,14 +49,36 @@ const createRedTile = (text) => {
     );
 };
 
-const Board = ({ input, testSolution }) => {
+const createStartTile = (text) => {
+	return (
+		<Hexagon
+			sideLength={40}
+			text={text}
+			fill="gold"
+			textStyle={{ fill: "blue" }}
+		/>
+	);
+};
+
+const createEndTile = (text) => {
+	return (
+		<Hexagon
+			sideLength={40}
+			text={text}
+			fill="green"
+			textStyle={{ fill: "white" }}
+		/>
+	);
+};
+
+const Board = ({ input, testSolution, setGeneratedInput }) => {
 	const arr2D = (r, c) => [...Array(r)].map((x) => Array(c).fill(null));
 	let boardObj = input;
 	if (typeof input == "string") {
 		boardObj = JSON.parse(input);
 	}
     const board = arr2D(boardObj.n, boardObj.n);
-    startBoard(board);
+    startBoard(board, boardObj.start, boardObj.goal);
 	const [cells, setCells] = useState([]);
 	const [colour, setColour] = useState("r");
 	const [solution, setSolution] = useState([]);
@@ -66,6 +88,14 @@ const Board = ({ input, testSolution }) => {
 		if (Object.keys(boardObj).length > 0) {
 			setCells(boardObj.board);
             setSolution(parseSolution(testSolution));
+			setGeneratedInput(
+				JSON.stringify({
+					n: boardObj.n,
+					board: generateCells(boardObj.board),
+					start: boardObj.start,
+					goal: boardObj.goal,
+				})
+			);
             console.log(solution);
 		}
 		console.log(boardObj.board);
@@ -74,6 +104,16 @@ const Board = ({ input, testSolution }) => {
 	useEffect(() => {
 		setSolution(parseSolution(testSolution));
 	}, [testSolution]);
+
+	const generateCells = (cells) => {
+		const generatedCells = [];
+		for (let i = 0; i < cells.length; i++) {
+			if (cells[i][0] !== "none") {
+				generatedCells.push(cells[i]);
+			}
+		}
+		return generatedCells;
+	};
 
 	const onClick = (cells, setCells, newCell) => {
 		let reverse = false;
@@ -93,9 +133,25 @@ const Board = ({ input, testSolution }) => {
 			newCells = cells.slice();
 			newCells[reverseLoc][0] = "none";
 			setCells(newCells);
+			setGeneratedInput(
+				JSON.stringify({
+					n: boardObj.n,
+					board: generateCells(newCells),
+					start: boardObj.start,
+					goal: boardObj.goal,
+				})
+			);
 			return;
 		}
 		setCells([...cells, newCell]);
+		setGeneratedInput(
+			JSON.stringify({
+				n: boardObj.n,
+				board: generateCells([...cells, newCell]),
+				start: boardObj.start,
+				goal: boardObj.goal,
+			})
+		);
 	};
 
 	const updateSolution = async () => {
@@ -130,7 +186,28 @@ const Board = ({ input, testSolution }) => {
 						Cachex
 					</h3>
 					<p className="mt-1 text-sm text-gray-600">
-						Implemented from Assignment 1, COMP30024 - The University of Melbourne
+						Implemented from Assignment 1, COMP30024 - The
+						University of Melbourne
+					</p>
+					<p className="mt-3 text-sm text-gray-600">
+						<b>Instructions for generating test case:</b>
+						<p>
+							1. Choose Blue 2. Fill in the board 3. Copy textbox
+							of "Generated Input Json From Board" 4. Paste directly into your .json file for testing (no need to further format it, it's valid JSON, paste and run)
+						</p>
+						<b>
+							Instructions for visualising your solution to the
+							generated test case:
+						</b>
+						<p>
+							1. Paste new board in "Input Json" 2. Paste solution
+							to "Test Solution" 3. Press "Save" 4. Press "Play"
+						</p>
+						<br />
+						<b>Reset board:</b>
+						<p>Press "Save"</p>
+						<b>Change board size:</b>
+						<p>Change the n attribute in Input Json and Press "Save"</p>
 					</p>
 				</div>
 			</div>
@@ -165,8 +242,8 @@ const makeBoard = (board, onClick, cells, setCells, colour) => {
 	// console.log(board);
 	const size = board.length;
 	return (
-		<div className="flex justify-center m-10 sm:p-0">
-			<div className="my-7">
+		<div className={size < 9 ? "flex justify-center": "w-full"}>
+			<div className="my-7 pb-12 border-4 border-dashed border-white border-b-red-300 border-l-blue-300">
 				{board.map((row, i) => {
 					return (
 						<div className={`flex -my-7`} key={`${i}`}>
@@ -213,10 +290,16 @@ const fillBoard = (board, cells) => {
 	});
 };
 
-const startBoard = (board) => {
+const startBoard = (board, start, end) => {
 	for (let i = 0; i < board.length; i++) {
         for (let j = 0; j < board[i].length; j++) {
-            board[i][j] = createTile(`(${i}, ${j})`);
+            if (i === start[0] && j === start[1]) {
+                board[i][j] = createStartTile(`(${i}, ${j})`);
+            } else if (i === end[0] && j === end[1]) {
+                board[i][j] = createEndTile(`(${i}, ${j})`);
+            } else {
+                board[i][j] = createTile(`(${i}, ${j})`);
+            }
         }
     }
 }

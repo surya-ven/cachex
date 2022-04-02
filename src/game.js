@@ -27,6 +27,8 @@ const [testSolution, setTestSolution] = useState(`8
 (0,0)
 `);
 
+const [generatedInput, setGeneratedInput] = useState(board);
+
 	// if (board) console.log(JSON.parse(board));
 
 	return (
@@ -35,12 +37,14 @@ const [testSolution, setTestSolution] = useState(`8
 			<Board
 				input={board}
 				testSolution={testSolution}
+				setGeneratedInput={setGeneratedInput}
 			/>
 			<BoardInput
 				board={board}
 				setBoard={setBoard}
 				testSolution={testSolution}
 				setTestSolution={setTestSolution}
+				generatedInput={generatedInput}
 			/>
 		</>
 	);
