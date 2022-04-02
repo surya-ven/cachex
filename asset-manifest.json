@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/cachex/static/css/main.0f06ffde.css",
-    "main.js": "/cachex/static/js/main.8d26247e.js",
+    "main.js": "/cachex/static/js/main.73cb7280.js",
     "index.html": "/cachex/index.html",
     "main.0f06ffde.css.map": "/cachex/static/css/main.0f06ffde.css.map",
-    "main.8d26247e.js.map": "/cachex/static/js/main.8d26247e.js.map"
+    "main.73cb7280.js.map": "/cachex/static/js/main.73cb7280.js.map"
   },
   "entrypoints": [
     "static/css/main.0f06ffde.css",
-    "static/js/main.8d26247e.js"
+    "static/js/main.73cb7280.js"
   ]
 }
