@@ -3,6 +3,8 @@ import Board from "./board";
 import SizeSelect from "./components/sizeSelect";
 import BoardInput from "./components/boardInput";
 
+/* Displays the game board and allows the user to select the size of the board */
+
 const Game = () => {
 	const [size, setSize] = useState(5);
 	const [board, setBoard] = useState(`{
@@ -28,9 +30,6 @@ const [testSolution, setTestSolution] = useState(`8
 `);
 
 const [generatedInput, setGeneratedInput] = useState(board);
-
-	// if (board) console.log(JSON.parse(board));
-
 	return (
 		<>
 			{/* <SizeSelect size={size} setSize={setSize} /> */}

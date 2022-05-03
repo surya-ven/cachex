@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 
 const tile = <Hexagon sideLength={40} text="Hi" textStyle={{ fill: "blue" }} />;
 
-
 const blueTile = (
 	<Hexagon
 		sideLength={40}
@@ -70,6 +69,8 @@ const createEndTile = (text) => {
 		/>
 	);
 };
+
+/* Creates a board with the given size and fills it with the given cells. */
 
 const Board = ({ input, testSolution, setGeneratedInput }) => {
 	const arr2D = (r, c) => [...Array(r)].map((x) => Array(c).fill(null));
@@ -182,33 +183,42 @@ const Board = ({ input, testSolution, setGeneratedInput }) => {
 		<div className="p-10 w-screen sm:w-auto">
 			<div>
 				<div className="mx-2 p-4 sm:px-0">
-					<h3 className="text-lg font-medium leading-6 text-gray-900">
+					<h3 className="w-28 text-lg font-bold leading-6 text-gray-900 text-center mb-5 p-5 bg-gradient-to-r from-red-50 to-sky-100 rounded-2xl">
 						Cachex
 					</h3>
 					<p className="mt-1 text-sm text-gray-600">
-						Implemented from Assignment 1, COMP30024 - The
-						University of Melbourne
+						Based on the game Cachex from Assignment 1, COMP30024, The University of
+						Melbourne. Made by Surya Venkatesh.
 					</p>
-					<p className="mt-3 text-sm text-gray-600">
-						<b>Instructions for generating test case:</b>
-						<p>
-							1. Choose Blue 2. Fill in the board 3. Copy textbox
-							of "Generated Input Json From Board" 4. Paste directly into your .json file for testing (no need to further format it, it's valid JSON, paste and run)
+					<div className="mt-3 p-5 bg-gray-50 rounded-2xl">
+						<p className="text-sm text-gray-600">
+							<b>Instructions for generating test case:</b>
+							<p>
+								1. Choose Blue 2. Fill in the board 3. Copy
+								textbox of "Generated Input Json From Board" 4.
+								Paste directly into your .json file for testing
+								(no need to further format it, it's valid JSON,
+								paste and run)
+							</p>
+							<b>
+								Instructions for visualising your solution to
+								the generated test case:
+							</b>
+							<p>
+								1. Paste new board in "Input Json" 2. Paste
+								solution to "Test Solution" 3. Press "Save" 4.
+								Press "Play"
+							</p>
+							<br />
+							<b>Reset board:</b>
+							<p>Press "Save"</p>
+							<b>Change board size:</b>
+							<p>
+								Change the n attribute in Input Json and Press
+								"Save"
+							</p>
 						</p>
-						<b>
-							Instructions for visualising your solution to the
-							generated test case:
-						</b>
-						<p>
-							1. Paste new board in "Input Json" 2. Paste solution
-							to "Test Solution" 3. Press "Save" 4. Press "Play"
-						</p>
-						<br />
-						<b>Reset board:</b>
-						<p>Press "Save"</p>
-						<b>Change board size:</b>
-						<p>Change the n attribute in Input Json and Press "Save"</p>
-					</p>
+					</div>
 				</div>
 			</div>
 			{

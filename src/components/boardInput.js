@@ -1,8 +1,6 @@
-import { useState } from "react";
+/* Takes in a board and returns a string of the board in json format */
 
 const BoardInput = ({ board, setBoard, testSolution, setTestSolution, generatedInput }) => {
-	
-	
 	const handleSubmit = (e) => {
 		e.preventDefault();
         // console.log(e.target.input.value);
@@ -42,7 +40,7 @@ const BoardInput = ({ board, setBoard, testSolution, setTestSolution, generatedI
 									name="input"
 									className="input w-full mt-5 mr-58 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-medium border-gray-300 rounded-md"
 									defaultValue={board}
-									rows="15"
+									rows="10"
 								/>
 
 								<div className="w-full ml-5">
@@ -54,7 +52,7 @@ const BoardInput = ({ board, setBoard, testSolution, setTestSolution, generatedI
 										name="testSolution"
 										className="input w-full focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-medium border-gray-300 rounded-md"
 										defaultValue={testSolution}
-										rows="15"
+										rows="10"
 									/>
 								</div>
 							</div>
@@ -72,7 +70,7 @@ const BoardInput = ({ board, setBoard, testSolution, setTestSolution, generatedI
 									// name="generated-input"
 									className="mt-5 w-60 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-medium border-gray-300 rounded-md"
 									value={generatedInput}
-									rows="15"
+									rows="10"
 								/>
 							</div>
 						</div>
